@@ -4,8 +4,14 @@ def index(request):
 		print "Debug"
 		return render(request, "secrets/index.html")
 def post_comment(request):
-	newcomment = request.POST['comment']
+	context= {
+	"comments": commentshere
+	}
 	print '*'*50
-	print newcomment
-	print '*'*50
-	redirect ('/')
+	if request.method == "POST":
+		request.session['comment'] = request.POST['comment']
+		print ('newcomment')
+		print '*' *50
+		return redirect('/')
+	else: 
+		print ('I Broke!')
